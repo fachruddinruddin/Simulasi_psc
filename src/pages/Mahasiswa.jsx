@@ -7,7 +7,7 @@ import Table from "../components/ui/Table.jsx";
 const Modal = ({ onClose, onSubmit, mahasiswa }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-4 sm:mx-auto">
         <h3 className="text-lg font-bold mb-4">
           {mahasiswa ? "Edit Mahasiswa" : "Tambah Mahasiswa"}
         </h3>
@@ -119,17 +119,17 @@ const Mahasiswa = () => {
   );
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold">Daftar Mahasiswa</h2>
-        <div className="flex items-center gap-4">
-          <div className="relative">
+    <div className="space-y-6 p-4 sm:p-6 lg:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center">
+        <h2 className="text-2xl font-semibold mb-4 sm:mb-0">Daftar Mahasiswa</h2>
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="relative w-full sm:w-auto">
             <input
               type="text"
               placeholder="Search items..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="pl-10 pr-4 py-2 border rounded-lg w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <FaSearch className="absolute left-3 top-2.5 text-gray-400" size={20} />
           </div>
