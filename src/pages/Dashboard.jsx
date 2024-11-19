@@ -1,15 +1,18 @@
-import React from 'react';
-import { useInventory } from '../context/InventoryContext';
+import React from "react";
+import { useInventory } from "../context/InventoryContext";
 
 const Dashboard = () => {
   const { inventory } = useInventory();
-  
+
   const totalItems = inventory.length;
   const totalStock = inventory.reduce((acc, item) => acc + item.stock, 0);
-  const totalValue = inventory.reduce((acc, item) => acc + (item.price * item.stock), 0);
+  const totalValue = inventory.reduce(
+    (acc, item) => acc + item.price * item.stock,
+    0
+  );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-4 sm:p-6 lg:p-8">
       <h2 className="text-2xl font-semibold">Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-sm">
