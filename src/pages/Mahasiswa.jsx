@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
+import { FaSearch } from "react-icons/fa"; // import Search icon from react-icons
 import Button from "../components/ui/Button.jsx";
 import Table from "../components/ui/Table.jsx";
 
@@ -18,7 +19,7 @@ const Modal = ({ onClose, onSubmit, mahasiswa }) => {
           />
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              Nama:
+              Nama
             </label>
             <input
               type="text"
@@ -30,7 +31,7 @@ const Modal = ({ onClose, onSubmit, mahasiswa }) => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              NIM:
+              NIM
             </label>
             <input
               type="text"
@@ -40,7 +41,7 @@ const Modal = ({ onClose, onSubmit, mahasiswa }) => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end space-x-2">
             <Button variant="danger" onClick={onClose}>
               Batal
             </Button>
@@ -63,6 +64,7 @@ const Mahasiswa = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentMahasiswa, setCurrentMahasiswa] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const toggleModal = () => setModalVisible((prev) => !prev);
 
   const handleFormSubmit = (e) => {
@@ -79,16 +81,12 @@ const Mahasiswa = () => {
 
     if (id) {
       setMahasiswaData((prev) =>
-        prev.map((m) =>
-          m.id === Number(id) ? { ...m, nama, nim } : m
-        )
+        prev.map((m) => (m.id === Number(id) ? { ...m, nama, nim } : m))
       );
       Swal.fire("Success", "Data berhasil diperbarui", "success");
     } else {
-      setMahasiswaData((prev) => [
-        ...prev,
-        { id: prev.length + 1, nama, nim },
-      ]);
+      const newId = mahasiswaData.length > 0 ? Math.max(...mahasiswaData.map(m => m.id)) + 1 : 1;
+      setMahasiswaData((prev) => [...prev, { id: newId, nama, nim }]);
       Swal.fire("Success", "Mahasiswa baru berhasil ditambahkan", "success");
     }
     toggleModal();
@@ -114,14 +112,34 @@ const Mahasiswa = () => {
     toggleModal();
   };
 
+  const filteredMahasiswaData = mahasiswaData.filter(
+    (m) =>
+      m.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      m.nim.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Daftar Mahasiswa</h2>
-      <Button variant="success" onClick={toggleModal}>
-        Tambah Mahasiswa
-      </Button>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-semibold">Daftar Mahasiswa</h2>
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search items..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <FaSearch className="absolute left-3 top-2.5 text-gray-400" size={20} />
+          </div>
+          <Button variant="primary" onClick={toggleModal}>
+            Tambah Mahasiswa
+          </Button>
+        </div>
+      </div>
       <Table
-        data={mahasiswaData}
+        data={filteredMahasiswaData} 
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

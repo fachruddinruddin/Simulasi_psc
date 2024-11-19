@@ -1,42 +1,55 @@
 import React from "react";
+import Button from "./Button";
 
 const Table = ({ data, onEdit, onDelete }) => {
   return (
-    <table className="w-full border-collapse border border-gray-200">
-      <thead>
-        <tr>
-          <th className="border border-gray-300 px-4 py-2">No</th>
-          <th className="border border-gray-300 px-4 py-2">Nama</th>
-          <th className="border border-gray-300 px-4 py-2">NIM</th>
-          <th className="border border-gray-300 px-4 py-2">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={item.id}>
-            <td className="border border-gray-300 px-4 py-2 text-center">
-              {index + 1}
-            </td>
-            <td className="border border-gray-300 px-4 py-2">{item.nama}</td>
-            <td className="border border-gray-300 px-4 py-2">{item.nim}</td>
-            <td className="border border-gray-300 px-4 py-2 text-center">
-              <button
-                className="bg-yellow-400 text-black px-2 py-1 mr-2 rounded"
-                onClick={() => onEdit(item)}
-              >
-                Edit
-              </button>
-              <button
-                className="bg-red-600 text-white px-2 py-1 rounded"
-                onClick={() => onDelete(item.id)}
-              >
-                Hapus
-              </button>
-            </td>
+    <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      <table className="w-full">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              No
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              Name
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              NIM
+            </th>
+            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              Actions
+            </th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          {data.map((item, index) => (
+            <tr key={item.id}>
+              <td className="px-6 py-4">
+                {index + 1}
+              </td>
+              <td className="px-6 py-4">{item.nama}</td>
+              <td className="px-6 py-4">{item.nim}</td>
+              <td className="px-6 py-4 space-x-2">
+                <Button
+                  variant="warning"
+                  size="sm"
+                  onClick={() => onEdit(item)}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => onDelete(item.id)}
+                >
+                  Hapus
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
