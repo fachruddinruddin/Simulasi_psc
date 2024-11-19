@@ -12,7 +12,7 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
           >
             <Menu size={24} />
           </button>
-          <h1 className="text-xl font-semibold">Manajemen Inventaris Barang</h1>
+          <h1 className="text-xl font-semibold">Admin Panel</h1>
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">

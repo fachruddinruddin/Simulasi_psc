@@ -6,6 +6,7 @@ import InventoryList from './pages/InventoryList';
 import ItemDetail from './pages/ItemDetail';
 import AddItem from './pages/AddItem';
 import { InventoryProvider } from './context/InventoryContext';
+import Mahasiswa from './pages/Mahasiswa';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/mahasiswa" element={<Mahasiswa />} />
             <Route path="/inventory" element={<InventoryList />} />
             <Route path="/inventory/:id" element={<ItemDetail />} />
             <Route path="/add" element={<AddItem />} />

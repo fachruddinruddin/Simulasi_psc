@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Package, LayoutDashboard, PlusCircle } from 'lucide-react';
+import { FaUserGraduate } from 'react-icons/fa';
 
 const Sidebar = ({ isOpen }) => {
   return (
@@ -11,6 +12,12 @@ const Sidebar = ({ isOpen }) => {
             <Link to="/" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg">
               <LayoutDashboard size={20} />
               {isOpen && <span>Dashboard</span>}
+            </Link>
+          </li>
+          <li>
+            <Link to="/mahasiswa" className="flex items-center gap-3 p-3 hover:bg-gray-100 rounded-lg">
+              <FaUserGraduate size={20} />
+              {isOpen && <span>Mahasiswa</span>}
             </Link>
           </li>
           <li>
