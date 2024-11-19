@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import { useInventory } from "../context/InventoryContext";
 import Button from "../components/ui/Button";
-import Input from "../components/ui/Input";
 
 const InventoryList = () => {
   const navigate = useNavigate();
@@ -41,6 +40,9 @@ const InventoryList = () => {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                Image
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                 Name
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
@@ -61,6 +63,9 @@ const InventoryList = () => {
             {filteredInventory.length > 0 ? (
               filteredInventory.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4">
+                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded" />
+                  </td>
                   <td className="px-6 py-4">{item.name}</td>
                   <td className="px-6 py-4">{item.category}</td>
                   <td className="px-6 py-4">{item.stock}</td>
@@ -80,7 +85,7 @@ const InventoryList = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center py-4 text-gray-500">
+                <td colSpan="6" className="text-center py-4 text-gray-500">
                   No items found
                 </td>
               </tr>

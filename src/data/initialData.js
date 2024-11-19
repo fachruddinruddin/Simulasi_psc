@@ -6,7 +6,7 @@ export const initialInventory = [
     stock: 15,
     price: 15000000,
     description: "High-end laptop for professional use",
-    image: "https://via.placeholder.com/600" // Example image URL
+    image: "https://example.com/images/laptop.jpg" // Updated image URL
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const initialInventory = [
     stock: 8,
     price: 3000000,
     description: "Color laser printer",
-    image: "https://via.placeholder.com/600" // Example image URL
+    image: "https://example.com/images/printer.jpg" // Updated image URL
   },
   {
     id: 3,
@@ -24,6 +24,6 @@ export const initialInventory = [
     stock: 25,
     price: 1200000,
     description: "Ergonomic office chair",
-    image: "https://via.placeholder.com/600" // Example image URL
+    image: "https://example.com/images/office-chair.jpg" // Updated image URL
   },
 ];
