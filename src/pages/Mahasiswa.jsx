@@ -121,7 +121,7 @@ const Mahasiswa = () => {
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:p-8">
      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-        <h2 className="text-2xl font-semibold">Daftar Mahasiswa</h2>
+        <h2 className="text-2xl font-semibold">Daftar Maha</h2>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="relative w-full sm:w-auto">
             <input
