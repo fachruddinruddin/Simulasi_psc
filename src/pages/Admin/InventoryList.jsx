@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import { useInventory } from "../context/InventoryContext";
-import Button from "../components/ui/Button";
+import { useInventory } from "../../context/InventoryContext";
+import Button from "../../components/ui/Button";
 
 const InventoryList = () => {
   const navigate = useNavigate();

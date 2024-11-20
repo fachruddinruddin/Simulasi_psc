@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { FaSearch } from "react-icons/fa";
-import Button from "../components/ui/Button.jsx";
-import Table from "../components/ui/Table.jsx";
-import { useMahasiswa } from "../context/MahasiswaContext"; // Import context
+import Button from "../../components/ui/Button.jsx";
+import Table from "../../components/ui/Table.jsx";
+import { useMahasiswa } from "../../context/MahasiswaContext.jsx"; // Import context
 
 const Modal = ({ onClose, onSubmit, mahasiswa }) => {
   return (

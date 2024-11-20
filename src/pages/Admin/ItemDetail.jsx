@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useInventory } from "../context/InventoryContext";
-import Button from "../components/ui/Button";
+import { useInventory } from "../../context/InventoryContext";
+import Button from "../../components/ui/Button";
 
 const ItemDetail = () => {
   const navigate = useNavigate();

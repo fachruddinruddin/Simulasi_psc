@@ -1,6 +1,6 @@
 import React from "react";
-import { useInventory } from "../context/InventoryContext";
-import { useMahasiswa } from "../context/MahasiswaContext"; // Import context
+import { useInventory } from "../../context/InventoryContext";
+import { useMahasiswa } from "../../context/MahasiswaContext"; // Import context
 
 const Dashboard = () => {
   const { inventory } = useInventory();
