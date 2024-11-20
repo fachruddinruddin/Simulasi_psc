@@ -19,7 +19,10 @@ const Header = ({ isSidebarOpen, setIsSidebarOpen }) => {
             <User size={20} />
             <span>Admin</span>
           </div>
-          <button className="p-2 hover:bg-gray-100 rounded-lg">
+          <button 
+            className="p-2 hover:bg-gray-100 rounded-lg" 
+            onClick={() => { window.location.href = '/login'; }}
+          >
             <LogOut size={20} />
           </button>
         </div>
