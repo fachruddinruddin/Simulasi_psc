@@ -1,10 +1,10 @@
 import React from "react";
 import { useInventory } from "../context/InventoryContext";
-import { useMahasiswa } from "../context/MahasiswaContext"; 
+import { useMahasiswa } from "../context/MahasiswaContext"; // Import context
 
 const Dashboard = () => {
   const { inventory } = useInventory();
-  const { mahasiswaData } = useMahasiswa(); 
+  const { mahasiswaData } = useMahasiswa(); // Use context data
 
   const totalItems = inventory.length;
   const totalStock = inventory.reduce((acc, item) => acc + item.stock, 0);

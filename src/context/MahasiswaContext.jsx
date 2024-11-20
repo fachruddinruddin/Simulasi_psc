@@ -1,6 +1,4 @@
-// context/MahasiswaContext.js
 import React, { createContext, useState, useContext } from "react";
-import { initialMahasiswa } from "../data/initialData";
 
 const MahasiswaContext = createContext();
 
@@ -9,22 +7,37 @@ export const useMahasiswa = () => {
 };
 
 export const MahasiswaProvider = ({ children }) => {
-  const [mahasiswaData, setMahasiswaData] = useState(initialMahasiswa);
+  const initialData = [
+    { id: 1, nama: "Muhammad Fachruddin", nim: "A11.2022.14476" },
+    { id: 2, nama: "Johan Ridho", nim: "A11.2022.12345" },
+    { id: 3, nama: "Reza Aufa", nim: "A11.2022.09876" },
+  ];
+
+  const [mahasiswaData, setMahasiswaData] = useState(initialData);
 
   const addMahasiswa = (newMahasiswa) => {
-    setMahasiswaData([
-      ...mahasiswaData,
-      { ...newMahasiswa, id: Date.now() },
-    ]);
+    setMahasiswaData((prev) => [...prev, newMahasiswa]);
   };
 
-  const value = {
-    mahasiswaData,
-    addMahasiswa,
+  const updateMahasiswa = (updatedMahasiswa) => {
+    setMahasiswaData((prev) =>
+      prev.map((m) => (m.id === updatedMahasiswa.id ? updatedMahasiswa : m))
+    );
+  };
+
+  const deleteMahasiswa = (id) => {
+    setMahasiswaData((prev) => prev.filter((m) => m.id !== id));
   };
 
   return (
-    <MahasiswaContext.Provider value={value}>
+    <MahasiswaContext.Provider
+      value={{
+        mahasiswaData,
+        addMahasiswa,
+        updateMahasiswa,
+        deleteMahasiswa,
+      }}
+    >
       {children}
     </MahasiswaContext.Provider>
   );

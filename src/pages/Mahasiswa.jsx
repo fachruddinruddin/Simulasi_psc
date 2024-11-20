@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { FaSearch } from "react-icons/fa"; // import Search icon from react-icons
+import { FaSearch } from "react-icons/fa";
 import Button from "../components/ui/Button.jsx";
 import Table from "../components/ui/Table.jsx";
+import { useMahasiswa } from "../context/MahasiswaContext"; // Import context
 
 const Modal = ({ onClose, onSubmit, mahasiswa }) => {
   return (
@@ -56,11 +57,8 @@ const Modal = ({ onClose, onSubmit, mahasiswa }) => {
 };
 
 const Mahasiswa = () => {
-  const [mahasiswaData, setMahasiswaData] = useState([
-    { id: 1, nama: "Muhammad Fachruddin", nim: "A11.2022.14476" },
-    { id: 2, nama: "Johan Ridho", nim: "A11.2022.12345" },
-    { id: 3, nama: "Reza Aufa", nim: "A11.2022.09876" },
-  ]);
+  const { mahasiswaData, addMahasiswa, updateMahasiswa, deleteMahasiswa } =
+    useMahasiswa(); // Access context
 
   const [modalVisible, setModalVisible] = useState(false);
   const [currentMahasiswa, setCurrentMahasiswa] = useState(null);
@@ -80,13 +78,11 @@ const Mahasiswa = () => {
     }
 
     if (id) {
-      setMahasiswaData((prev) =>
-        prev.map((m) => (m.id === Number(id) ? { ...m, nama, nim } : m))
-      );
+      updateMahasiswa({ id: Number(id), nama, nim });
       Swal.fire("Success", "Data berhasil diperbarui", "success");
     } else {
       const newId = mahasiswaData.length > 0 ? Math.max(...mahasiswaData.map(m => m.id)) + 1 : 1;
-      setMahasiswaData((prev) => [...prev, { id: newId, nama, nim }]);
+      addMahasiswa({ id: newId, nama, nim });
       Swal.fire("Success", "Mahasiswa baru berhasil ditambahkan", "success");
     }
     toggleModal();
@@ -101,7 +97,7 @@ const Mahasiswa = () => {
       confirmButtonText: "Ya",
     }).then((result) => {
       if (result.isConfirmed) {
-        setMahasiswaData((prev) => prev.filter((m) => m.id !== id));
+        deleteMahasiswa(id);
         Swal.fire("Deleted", "Data berhasil dihapus", "success");
       }
     });
@@ -109,7 +105,12 @@ const Mahasiswa = () => {
 
   const handleEdit = (mahasiswa) => {
     setCurrentMahasiswa(mahasiswa);
-    toggleModal();
+    setModalVisible(true);
+  };
+
+  const handleAdd = () => {
+    setCurrentMahasiswa(null);
+    setModalVisible(true);
   };
 
   const filteredMahasiswaData = mahasiswaData.filter(
@@ -120,7 +121,7 @@ const Mahasiswa = () => {
 
   return (
     <div className="space-y-6 p-4 sm:p-6 lg:p-8">
-     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
         <h2 className="text-2xl font-semibold">Daftar Mahasiswa</h2>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="relative w-full sm:w-auto">
@@ -133,13 +134,13 @@ const Mahasiswa = () => {
             />
             <FaSearch className="absolute left-3 top-2.5 text-gray-400" size={20} />
           </div>
-          <Button variant="primary" onClick={toggleModal}>
+          <Button variant="primary" onClick={handleAdd}>
             Tambah Mahasiswa
           </Button>
         </div>
       </div>
       <Table
-        data={filteredMahasiswaData} 
+        data={filteredMahasiswaData}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
