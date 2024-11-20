@@ -1,8 +1,10 @@
 import React from "react";
 import { useInventory } from "../context/InventoryContext";
+import { useMahasiswa } from "../context/MahasiswaContext"; 
 
 const Dashboard = () => {
-  const { inventory, mahasiswaData } = useInventory();
+  const { inventory } = useInventory();
+  const { mahasiswaData } = useMahasiswa(); 
 
   const totalItems = inventory.length;
   const totalStock = inventory.reduce((acc, item) => acc + item.stock, 0);
@@ -10,11 +12,10 @@ const Dashboard = () => {
     (acc, item) => acc + item.price * item.stock,
     0
   );
-
   const totalMahasiswa = mahasiswaData.length;
 
   return (
-    <div className="space-y-6 p-4 sm:p-6 lg:p-8 bg-gray-50 min-h-screen">
+    <div className="space-y-6 p-4 sm:p-6 lg:p-8">
       <h2 className="text-2xl font-semibold mb-6">Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-md">
